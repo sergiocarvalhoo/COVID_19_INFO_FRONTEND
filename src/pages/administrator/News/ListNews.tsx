@@ -3,6 +3,7 @@ import { Button, DefaultTheme, Provider as PaperProvider } from 'react-native-pa
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import BottomNavigation from '../../../components/BottomNavigation'
 
 const theme = {
   ...DefaultTheme,
@@ -14,12 +15,14 @@ const theme = {
   },
 };
 
-export default function Index() {
+export default function News({ navigation }) {
   return (
 
     <PaperProvider theme={theme}>
 
       <View style={styles.container}>
+
+        <Text style={styles.title}>Noticías Administrator</Text>
 
         <Icon
           style={styles.icon}
@@ -28,13 +31,7 @@ export default function Index() {
           color="#FFF"
         />
 
-        <Text style={styles.title}>COVID 19 - INFO</Text>
-        <Text style={styles.welcome}>Aplicativo de Notícias e Informações do Covid-19, na Cidade de Cajazeiras - PB.</Text>
 
-
-        <Button icon="play" mode="contained" onPress={() => console.log('Pressed')}>
-        Iniciar
-        </Button>
 
       </View>
 
