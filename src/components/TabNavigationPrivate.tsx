@@ -14,10 +14,9 @@ function TabNavigationPrivate(){
     return(
         <Tab.Navigator 
         initialRouteName="Noticías" 
-        activeColor="#000000"
-        inactiveColor="#FFFFFF"
-        color= "#FF5B5B"
-        barStyle={{ color: "#FF5B5B" }}
+        activeColor="#000"
+        inactiveColor="white"
+        barStyle={{ backgroundColor: '#FF5B5B' }}
         >
           <Tab.Screen 
           name="Noticías" 
@@ -38,7 +37,7 @@ function TabNavigationPrivate(){
           }}            
           />
           <Tab.Screen 
-          name="Locais" 
+          name="Locais de Vacinação" 
           component={VaccinationLocal} 
           options={{
             tabBarIcon: ({ color }) => (
@@ -46,7 +45,7 @@ function TabNavigationPrivate(){
             ),
           }}            
           />
-          <Tab.Screen 
+          {/* <Tab.Screen 
           name="Sobre" 
           component={About} 
           options={{
@@ -54,7 +53,7 @@ function TabNavigationPrivate(){
               <Icon name="help-circle" color={color} size={26} />
             ),
           }}             
-          />
+          /> */}
         </Tab.Navigator>
     );
 }

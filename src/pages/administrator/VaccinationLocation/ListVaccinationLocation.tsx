@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
+import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
 
-import BottomNavigation from '../../../components/BottomNavigation'
 
 const theme = {
   ...DefaultTheme,
@@ -15,10 +16,15 @@ const theme = {
   },
 };
 
-export default function VaccinationLocal({ navigation }) {
-  return (
+export default function VaccinationLocal() {
 
+  const navigation = useNavigation();
+
+  return (
+   
     <PaperProvider theme={theme}>
+
+      <HeaderRedLogged titulo="Fazer LogOff"/>
 
       <View style={styles.container}>
 
@@ -28,21 +34,20 @@ export default function VaccinationLocal({ navigation }) {
           style={styles.icon}
           name="local-hospital"
           size={128}
-          color="#FFF"
+          color="#000"
         />
-
-
 
       </View>
 
    </PaperProvider>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FF5B5B',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -51,16 +56,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontFamily: 'bold',
-    color: 'white',
+    fontFamily: 'Roboto',
+    color: '#000',
     paddingBottom: 40,
-    textAlign: 'center'
-  },
-  welcome: {
-    fontSize: 18,
-    fontFamily: 'bold',
-    color: 'white',
-    paddingBottom: 20,
     textAlign: 'center'
   }
 });

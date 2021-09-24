@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
+
 
 const theme = {
   ...DefaultTheme,
@@ -13,7 +15,10 @@ const theme = {
   },
 };
 
-export default function Index({ navigation }) {
+export default function Index() {
+
+  const navigation = useNavigation();
+
   return (
 
     <PaperProvider theme={theme}>
@@ -29,7 +34,6 @@ export default function Index({ navigation }) {
 
         <Text style={styles.title}>COVID 19 - INFO</Text>
         <Text style={styles.welcome}>Aplicativo de Notícias e Informações do Covid-19, na Cidade de Cajazeiras - PB.</Text>
-
 
         <Button icon="play" mode="contained" onPress={() => navigation.navigate('ChooseAccess')}>
         Iniciar
@@ -53,14 +57,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontFamily: 'bold',
+    fontFamily: 'Roboto',
     color: 'white',
     paddingBottom: 40,
     textAlign: 'center'
   },
   welcome: {
     fontSize: 18,
-    fontFamily: 'bold',
+    fontFamily: 'Roboto',
     color: 'white',
     paddingBottom: 20,
     textAlign: 'center'

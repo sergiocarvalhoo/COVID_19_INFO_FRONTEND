@@ -3,6 +3,9 @@ import AppLoading from 'expo-app-loading';
 import StackNavigation from './src/components/StackNavigation';
 import { useFonts } from 'expo-font'
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
+import { NavigationContainer } from '@react-navigation/native';
+import {AuthProvider} from './src/context/AuthProvider';
+
 
 export default function App() {
 
@@ -15,7 +18,11 @@ export default function App() {
 
   return (
     <>
-      <StackNavigation/>
+      <NavigationContainer>
+        <AuthProvider>
+        <StackNavigation/>
+        </AuthProvider>
+      </NavigationContainer>  
     </>
   )
 }

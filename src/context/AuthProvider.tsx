@@ -1,5 +1,5 @@
 import React,{createContext, useContext, useEffect, useState} from "react";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import apiConnection from '../services/ApiConnection'
 
 
@@ -16,7 +16,8 @@ interface ResponseData{
 interface Context{
     administrator:Administrator | null;
     login: (cpf:string, password:string) => Promise<void>;
-    logout: () => Promise<void>
+    logout: () => Promise<void>;
+    isLogged: boolean;
 }
 
 
@@ -26,6 +27,7 @@ export const AuthProvider: React.FC = ({children}) => {
 
     const [administrator, setAdministrator] = useState<Administrator | null>(null);
 
+    useEffect(() => {
     async function loadStorage(){
         const administratorStorage = await AsyncStorage.getItem('Auth.administrator');
         const tokenStorage = await AsyncStorage.getItem('Auth.token');
@@ -35,10 +37,8 @@ export const AuthProvider: React.FC = ({children}) => {
             setAdministrator(JSON.parse(administratorStorage));
         }
     }
-
-    useEffect(() => {
-        loadStorage();
-    },[]);
+    loadStorage();
+  },[]);
 
     async function login(cpf:string, password:string){
 
@@ -46,7 +46,9 @@ export const AuthProvider: React.FC = ({children}) => {
             cpf, password
         }
 
-        const {administrator, token} = await apiConnection.post('', data) as ResponseData;
+        const response = await apiConnection.post('login', data);
+
+        const {administrator, token} = response.data as ResponseData;
 
         apiConnection.defaults.headers.common.Authorization = `Bearer ${token}`;
 
@@ -66,7 +68,8 @@ export const AuthProvider: React.FC = ({children}) => {
     }
     return (
         <AuthContext.Provider
-        value={{administrator, login, logout}}>
+        value={{administrator, login, logout, isLogged: !!administrator}}
+        >
             {children}    
         </AuthContext.Provider>
     );

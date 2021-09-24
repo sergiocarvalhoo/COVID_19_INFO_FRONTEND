@@ -2,6 +2,8 @@ import React from 'react';
 import { Appbar, Button, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
+import HeaderWhite from '../../components/Headers/HeaderWhite';
 
 
 const theme = {
@@ -14,21 +16,17 @@ const theme = {
   },
 };
 
-export default function ChooseAccess({ navigation }) {
 
-  const _goBack = () => navigation.goBack();
+export default function ChooseAccess() {
+  
+  const navigation = useNavigation();
 
   return (
 
     <PaperProvider theme={theme}>
 
-      <View>
-        <Appbar.Header>
-            <Appbar.BackAction onPress={_goBack} />
-            <Appbar.Content title="Voltar" subtitle="Voltar para o Início" />
-        </Appbar.Header>       
-      </View>
-
+    <HeaderWhite titulo="Voltar para Página Inicial" navigationPage="Welcome"/>
+    
       <View style={styles.container}>
 
         <Icon
@@ -40,7 +38,6 @@ export default function ChooseAccess({ navigation }) {
 
         <Text style={styles.title}>COVID 19 - INFO</Text>
         <Text style={styles.access}>Escolha o Tipo de Acesso para Prosseguir com o Uso do App: </Text>
-
 
         <Button style={styles.button} icon="login" mode="contained" onPress={() => navigation.navigate('TabNavigationPublic')}>
         Acessar
@@ -68,14 +65,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontFamily: 'bold',
+    fontFamily: 'Roboto',
     color: 'white',
     paddingBottom: 40,
     textAlign: 'center',
   },
   access: {
     fontSize: 18,
-    fontFamily: 'bold',
+    fontFamily: 'Roboto',
     color: 'white',
     paddingBottom: 20,
     textAlign: 'center'

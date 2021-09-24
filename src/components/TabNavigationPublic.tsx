@@ -14,10 +14,9 @@ function TabNavigationPublic(){
     return(
         <Tab.Navigator 
         initialRouteName="Noticías" 
-        activeColor="#000000"
-        inactiveColor="#FFFFFF"
-        color= "#FF5B5B"
-        barStyle={{ color: "#FF5B5B" }}
+        activeColor="#000"
+        inactiveColor="white"
+        barStyle={{ backgroundColor: '#FF5B5B' }}
         >
           <Tab.Screen 
           name="Noticías" 

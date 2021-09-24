@@ -1,8 +1,9 @@
 import axios from "axios";
-require('dotenv').config()
+import {IP, PORT} from "@env";
+
 
 const apiConnection = axios.create({
-    baseURL: 'http://' + process.env.IP + ':' + process.env.PORT + '/login'
+    baseURL: 'http://' + IP + ':' + PORT
 });
 
 export default apiConnection;

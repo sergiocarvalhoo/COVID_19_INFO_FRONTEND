@@ -13,7 +13,6 @@ const Stack = createStackNavigator();
 
 function StackNavigation(){ 
     return(
-        <NavigationContainer>
             <Stack.Navigator initialRouteName="Welcome" screenOptions={{headerShown:false, cardStyle:{backgroundColor:'#f2f3f5'}}}>
                 <Stack.Screen name="Welcome" component={Index} />
                 <Stack.Screen name="ChooseAccess" component={ChooseAccess} />
@@ -21,7 +20,6 @@ function StackNavigation(){
                 <Stack.Screen name="TabNavigationPrivate" component={TabNavigationPrivate} />
                 <Stack.Screen name="TabNavigationPublic" component={TabNavigationPublic} />                
             </Stack.Navigator>
-        </NavigationContainer>
     );
 }
 
