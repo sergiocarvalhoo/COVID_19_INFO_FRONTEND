@@ -48,7 +48,7 @@ export default function ListBulletin() {
 
       <View style={styles.container}>
 
-        <Text style={styles.title}>Boletins Administrator</Text>
+        <Text style={styles.title}>Lista De Boletins</Text>
 
         <ScrollView>
             
