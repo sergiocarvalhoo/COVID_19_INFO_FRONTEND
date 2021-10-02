@@ -23,7 +23,7 @@ export default function Bulletin() {
 
     <PaperProvider theme={theme}>
 
-      <HeaderRedLogged titulo="Fazer LogOff"/>
+      <HeaderRedLogged titulo="Fazer Logout"/>
 
       <View style={styles.container}>
 

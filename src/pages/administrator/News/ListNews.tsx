@@ -24,7 +24,7 @@ export default function News() {
 
     <PaperProvider theme={theme}>
 
-      <HeaderRedLogged titulo="Fazer LogOff"/>
+      <HeaderRedLogged titulo="Fazer Logout"/> 
 
       <View style={styles.container}>
 

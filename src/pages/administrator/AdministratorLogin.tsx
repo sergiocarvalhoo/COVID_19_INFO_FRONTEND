@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
-import { Button, DefaultTheme, Provider as PaperProvider, TextInput, Title } from 'react-native-paper';
+import { Button, DefaultTheme, Provider as PaperProvider, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import HeaderWhite from '../../components/Headers/HeaderWhite';
-import {AuthProvider} from '../../context/AuthProvider';
+import { AuthProvider } from '../../context/AuthProvider';
 import { useMyContext } from '../../context/AuthProvider';
 
 

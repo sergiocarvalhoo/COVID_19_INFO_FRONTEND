@@ -2,10 +2,10 @@ import * as React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import News from '../pages/public/News/ListNews';
-import Bulletin from '../pages/public/Bulletin/ListBulletin';
-import VaccinationLocal from '../pages/public/VaccinationLocation/ListVaccinationLocation';
-import About from '../pages/public/About';
+import News from '../../pages/public/News/ListNews';
+import Bulletin from '../../pages/public/Bulletin/ListBulletin';
+import VaccinationLocal from '../../pages/public/VaccinationLocation/ListVaccinationLocation';
+import About from '../../pages/public/About';
 
 
 const Tab = createMaterialBottomTabNavigator();
