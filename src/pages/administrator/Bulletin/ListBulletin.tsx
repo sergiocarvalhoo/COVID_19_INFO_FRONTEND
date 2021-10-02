@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
+import apiConnection from '../../../services/ApiConnection';
 
 const theme = {
   ...DefaultTheme,
@@ -15,7 +16,27 @@ const theme = {
   },
 };
 
-export default function Bulletin() {
+interface Bulletin {
+  id: number,
+  confirmed: number,
+  recovered: number,
+  discarded: number,
+  under_review: number,
+  admitted: number,
+  deaths: number,
+  publication_date: Date
+}
+
+export default function ListBulletin() {
+
+  const [bulletin, setBulletin] = useState<Bulletin[]>([]);
+
+  useFocusEffect(()=>{
+    apiConnection.get('/bulletins').then(response =>{
+      setBulletin(response.data);
+    })
+  })
+  
 
   const navigation = useNavigation();
 
@@ -29,12 +50,22 @@ export default function Bulletin() {
 
         <Text style={styles.title}>Boletins Administrator</Text>
 
-        <Icon
-          style={styles.icon}
-          name="local-hospital"
-          size={128}
-          color="#000"
-        />
+        <ScrollView>
+            
+          {
+            bulletin.map(bulletin =>
+
+              <View style={styles.item} key={bulletin.id}>
+
+                <Text style={styles.textItem}>ID: {bulletin.id}</Text>
+                <Text style={styles.textItem}>Data: {bulletin.publication_date}</Text>
+
+              </View>
+              
+            )
+          }  
+
+        </ScrollView>
 
       </View>
 
@@ -47,17 +78,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   icon: {
     paddingBottom: 30
   },
   title: {
-    fontSize: 36,
+    fontSize: 25,
     fontFamily: 'Roboto',
     color: '#000',
-    paddingBottom: 40,
+    paddingTop: 15,
+    paddingBottom: 20,
     textAlign: 'center'
+  },
+  item: {
+    backgroundColor: '#BDBDBD',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: 5,
+    margin: 2,
+    borderColor: '#2a4944',
+    borderWidth: 2
+  },
+  textItem: {
+    fontSize: 18,
+    fontFamily: 'Roboto',    
   }
 });
