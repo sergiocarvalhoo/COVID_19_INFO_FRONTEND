@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^5.x",
     "@types/react-native-dotenv": "^0.2.0",
     "axios": "^0.21.4",
+    "date-fns": "^2.24.0",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.2.1",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DefaultTheme, Provider as PaperProvider, TextInput } from 'react-native-paper';
+import { Button, DefaultTheme, FAB, Provider as PaperProvider, TextInput } from 'react-native-paper';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -91,6 +91,13 @@ export default function ListNews() {
 
         </ScrollView>
 
+        <FAB
+          style={styles.fab}
+          color="white"
+          icon="plus"
+          onPress={() => console.log('Pressed')}
+        />
+
       </View>
 
     </PaperProvider>
@@ -127,5 +134,13 @@ const styles = StyleSheet.create({
   textItem: {
     fontSize: 18,
     fontFamily: 'Roboto',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'black'
   }
+
 });

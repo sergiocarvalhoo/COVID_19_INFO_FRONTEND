@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DefaultTheme, Provider as PaperProvider, TextInput } from 'react-native-paper';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, Dimensions } from 'react-native';
+import { Card, DefaultTheme, Paragraph, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
+import { ScrollView, StyleSheet, View, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import apiConnection from '../../../services/ApiConnection';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
-import { BorderlessButton } from 'react-native-gesture-handler';
 import AppLoading from 'expo-app-loading';
+import { FormatDate } from '../../../util/DateFormat';
 
 
 const theme = {
@@ -61,38 +61,50 @@ export default function DetailsNews() {
 
             <View style={styles.container}>
 
-                <Text style={styles.title}>{news.title}</Text>
+                <Card>
 
-                <ScrollView>
+                    <ScrollView>
 
-                    <View style={styles.item} key={news.id}>
+                        <View key={news.id}>
 
-                        <Text style={styles.textItem}>{news.description}</Text>
+                            <Card.Content>
+                                <Title>{news.title}</Title>
+
+                                {
+
+                                    news.imagesPath?.map(image => (
+
+                                        <View style={styles.item} key={image.id}>
+
+                                            <Card.Cover
+                                                key={image.id}
+                                                source={{ uri: image.url }}
+                                            />
+
+                                        </View>
+
+                                    )
+                                    )
+                                }
+
+                                <Subheading style={styles.data}>Data de Publicação:
+                                    {
 
 
-                        {
+                                        news.publication_date
 
-                            news.imagesPath?.map(image => (
+                                    }
+                                </Subheading>
 
-                                <View style={styles.item} key={image.id}>
+                                <Paragraph>{news.description}</Paragraph>
 
-                                    <Image
-                                        key={image.id}
-                                        source={{ uri: image.url }}
-                                        style={styles.image}
-                                    />
+                            </Card.Content>
 
-                                </View>
+                        </View>
 
-                            )
-                            )
-                        }
+                    </ScrollView>
 
-                        <Text style={styles.textItem}>Data da Publicação: {news.publication_date}</Text>
-
-                    </View>
-
-                </ScrollView>
+                </Card>
 
             </View>
 
@@ -135,5 +147,9 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width - 35,
         height: 240,
         resizeMode: 'cover',
+    },
+    data: {
+        fontFamily: 'Roboto',
+        fontWeight: 'bold'
     }
 });
