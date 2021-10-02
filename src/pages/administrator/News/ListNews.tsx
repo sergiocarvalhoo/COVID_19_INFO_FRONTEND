@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DefaultTheme, Provider as PaperProvider, TextInput } from 'react-native-paper';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import apiConnection from '../../../services/ApiConnection';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
 import { BorderlessButton } from 'react-native-gesture-handler';
@@ -28,7 +28,23 @@ interface News {
 
 export default function ListNews() {
 
+  const navigation = useNavigation();
+
   const [news, setNews] = useState<News[]>([]);
+
+  function handleDetailNews(id: number) {
+    navigation.navigate('DetailNews', { id })
+  }
+
+  // async function handleDeleteNews(id: number) {
+
+  //   const idNews = {
+  //     id
+  //   }
+
+  //   await apiConnection.delete('/deletenews', idNews);
+
+  // }
 
   useFocusEffect(() => {
     apiConnection.get('/readnews').then(response => {
@@ -56,9 +72,13 @@ export default function ListNews() {
                 <Text style={styles.textItem}>{news.title}</Text>
                 <Text style={styles.textItem}>Data da Publicação: {news.publication_date}</Text>
 
-                <BorderlessButton>
-                  <Icon name="delete-forever" size={32} color="black" />
+                <BorderlessButton onPress={() => { handleDetailNews(news.id) }}>
+                  <Icon name="view-list" size={32} color="black" />
                 </BorderlessButton>
+
+                {/* <BorderlessButton onPress={() => { handleDeleteNews(news.id) }}>
+                  <Icon name="delete-forever" size={32} color="black" />
+                </BorderlessButton> */}
 
                 <BorderlessButton>
                   <Icon name="update" size={32} color="black" />
@@ -107,6 +127,5 @@ const styles = StyleSheet.create({
   textItem: {
     fontSize: 18,
     fontFamily: 'Roboto',
-    //fontWeight: 'bold',
   }
 });
