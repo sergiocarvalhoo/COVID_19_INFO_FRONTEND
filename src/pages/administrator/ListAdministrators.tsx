@@ -1,6 +1,6 @@
-import React,{useEffect, useState} from 'react';
-import { Button, DefaultTheme, Provider as PaperProvider, TextInput } from 'react-native-paper';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React,{ useState } from 'react';
+import { Button, Card, DefaultTheme, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import apiConnection from '../../services/ApiConnection';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HeaderRedLogged from '../../components/Headers/HeaderRedLogged';
@@ -48,17 +48,28 @@ export default function ListAdministrators() {
         <ScrollView>
             
           {
-            administrators.map(administrator =>
+            administrators.map(administrator => (
 
-              <View style={styles.item} key={administrator.registration}>
+              <View>
 
-                <Text style={styles.textItem}>Nome: {administrator.name}</Text>
-                <Text style={styles.textItem}>Matricula: {administrator.registration}</Text>
-                <Text style={styles.textItem}>Cargo: {administrator.occupation}</Text>
-                <Text style={styles.textItem}>E-mail: {administrator.email}</Text>
+                <Card 
+                  style={styles.card}
+                  elevation = {7}
+                  mode="elevated"
+                >
+
+                  <Card.Content>
+                    <Title>{administrator.name}</Title>
+                    <Subheading>{administrator.registration}</Subheading>
+                    <Subheading>{administrator.occupation}</Subheading>
+                    <Subheading>{administrator.email}</Subheading>
+                  </Card.Content>
+
+                </Card>
 
               </View>
-              
+
+              )
             )
           }  
 
@@ -100,5 +111,8 @@ const styles = StyleSheet.create({
   textItem: {
     fontSize: 18,
     fontFamily: 'Roboto',    
+  },
+  card: {
+    margin: 5
   }
 });
