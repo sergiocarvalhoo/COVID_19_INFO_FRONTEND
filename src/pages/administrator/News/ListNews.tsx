@@ -70,7 +70,6 @@ export default function ListNews() {
                 <Text style={styles.textItem}>{news.title}</Text>
                 <Text style={styles.textItem}>Data da Publicação: {news.publication_date}</Text>
 
-
                 <View style={styles.button}>
 
                   <BorderlessButton>
