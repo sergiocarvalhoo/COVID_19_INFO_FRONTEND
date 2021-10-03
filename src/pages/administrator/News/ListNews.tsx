@@ -32,19 +32,17 @@ export default function ListNews() {
 
   const [news, setNews] = useState<News[]>([]);
 
-  function handleDetailNews(id: number) {
-    navigation.navigate('DetailNews', { id })
+  function handlecreateNews() {
+    navigation.navigate('CreateNews');
   }
 
-  // async function handleDeleteNews(id: number) {
+  function handleDetailNews(id: number) {
+    navigation.navigate('DetailNews', { id });
+  }
 
-  //   const idNews = {
-  //     id
-  //   }
-
-  //   await apiConnection.delete('/deletenews', idNews);
-
-  // }
+  function handleDeleteNews(id: number) {
+    apiConnection.delete('/deletenews', { data: { id: `${id}` } });
+  }
 
   useFocusEffect(() => {
     apiConnection.get('/readnews').then(response => {
@@ -72,17 +70,22 @@ export default function ListNews() {
                 <Text style={styles.textItem}>{news.title}</Text>
                 <Text style={styles.textItem}>Data da Publicação: {news.publication_date}</Text>
 
-                <BorderlessButton onPress={() => { handleDetailNews(news.id) }}>
-                  <Icon name="view-list" size={32} color="black" />
-                </BorderlessButton>
 
-                {/* <BorderlessButton onPress={() => { handleDeleteNews(news.id) }}>
-                  <Icon name="delete-forever" size={32} color="black" />
-                </BorderlessButton> */}
+                <View style={styles.button}>
 
-                <BorderlessButton>
-                  <Icon name="update" size={32} color="black" />
-                </BorderlessButton>
+                  <BorderlessButton>
+                    <Icon name="edit" size={32} color="black" />
+                  </BorderlessButton>
+
+                  <BorderlessButton onPress={() => { handleDetailNews(news.id) }}>
+                    <Icon name="view-list" size={32} color="black" />
+                  </BorderlessButton>
+
+                  <BorderlessButton onPress={() => { handleDeleteNews(news.id) }}>
+                    <Icon name="delete-forever" size={32} color="black" />
+                  </BorderlessButton>
+
+                </View>
 
               </View>
 
@@ -95,7 +98,7 @@ export default function ListNews() {
           style={styles.fab}
           color="white"
           icon="plus"
-          onPress={() => console.log('Pressed')}
+          onPress={() => { handlecreateNews() }}
         />
 
       </View>
@@ -133,7 +136,11 @@ const styles = StyleSheet.create({
   },
   textItem: {
     fontSize: 18,
-    fontFamily: 'Roboto',
+    justifyContent: 'center',
+  },
+  button: {
+    flexDirection: 'row',
+    alignContent: 'center'
   },
   fab: {
     position: 'absolute',
