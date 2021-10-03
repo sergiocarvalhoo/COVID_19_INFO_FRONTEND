@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, DefaultTheme, FAB, Provider as PaperProvider, TextInput } from 'react-native-paper';
+import { Button, Card, DefaultTheme, FAB, Provider as PaperProvider, Subheading, TextInput, Title } from 'react-native-paper';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -65,26 +65,40 @@ export default function ListNews() {
           {
             news.map(news =>
 
-              <View style={styles.item} key={news.id}>
+              <View key={news.id}>
 
-                <Text style={styles.textItem}>{news.title}</Text>
-                <Text style={styles.textItem}>Data da Publicação: {news.publication_date}</Text>
+                <Card
+                  style={styles.card}
+                  elevation={7}
+                  mode="elevated"
+                >
 
-                <View style={styles.button}>
+                  <Card.Content>
+                    <Title>{news.title}</Title>
+                    <Subheading>Data da Publicação: {news.publication_date}</Subheading>
+                  </Card.Content>
 
-                  <BorderlessButton>
-                    <Icon name="edit" size={32} color="black" />
-                  </BorderlessButton>
+                  <Card>
+                    <Card.Content>
+                      <View style={styles.button}>
 
-                  <BorderlessButton onPress={() => { handleDetailNews(news.id) }}>
-                    <Icon name="view-list" size={32} color="black" />
-                  </BorderlessButton>
+                        <BorderlessButton>
+                          <Icon name="edit" size={32} color="black" />
+                        </BorderlessButton>
 
-                  <BorderlessButton onPress={() => { handleDeleteNews(news.id) }}>
-                    <Icon name="delete-forever" size={32} color="black" />
-                  </BorderlessButton>
+                        <BorderlessButton onPress={() => { handleDetailNews(news.id) }}>
+                          <Icon name="view-list" size={32} color="black" />
+                        </BorderlessButton>
 
-                </View>
+                        <BorderlessButton onPress={() => { handleDeleteNews(news.id) }}>
+                          <Icon name="delete-forever" size={32} color="black" />
+                        </BorderlessButton>
+
+                      </View>
+                    </Card.Content>
+                  </Card>
+
+                </Card>
 
               </View>
 
@@ -147,6 +161,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: 'black'
+  },
+  card: {
+    margin: 5
   }
-
 });
