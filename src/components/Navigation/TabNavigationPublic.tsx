@@ -13,13 +13,13 @@ const Tab = createMaterialBottomTabNavigator();
 function TabNavigationPublic(){ 
     return(
         <Tab.Navigator 
-        initialRouteName="Noticías" 
+        initialRouteName="NoticíasUser" 
         activeColor="#000"
         inactiveColor="white"
         barStyle={{ backgroundColor: '#FF5B5B' }}
         >
           <Tab.Screen 
-          name="Noticías" 
+          name="NoticíasUser" 
           component={News} 
           options={{
             tabBarIcon: ({ color }) => (
@@ -28,7 +28,7 @@ function TabNavigationPublic(){
           }}          
           />
           <Tab.Screen 
-          name="Boletins" 
+          name="BoletinsUser" 
           component={Bulletin} 
           options={{
             tabBarIcon: ({ color }) => (
@@ -37,7 +37,7 @@ function TabNavigationPublic(){
           }}            
           />
           <Tab.Screen 
-          name="Locais" 
+          name="LocaisUser" 
           component={VaccinationLocal} 
           options={{
             tabBarIcon: ({ color }) => (
@@ -46,7 +46,7 @@ function TabNavigationPublic(){
           }}            
           />
           <Tab.Screen 
-          name="Sobre" 
+          name="SobreUser" 
           component={About} 
           options={{
             tabBarIcon: ({ color }) => (

@@ -9,6 +9,7 @@ import TabNavigationPrivate from './TabNavigationPrivate';
 import TabNavigationPublic from './TabNavigationPublic';
 import DetailsNews from '../../pages/administrator/News/DetailNews';
 import CreateNews from '../../pages/administrator/News/CreateNews';
+import DetailsNewsUser from '../../pages/public/News/DetailNews';
 
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ function StackNavigation() {
             <Stack.Screen name="ChooseAccess" component={ChooseAccess} />
             <Stack.Screen name="AdministratorLogin" component={AdministratorLogin} />
             <Stack.Screen name="DetailNews" component={DetailsNews} />
+            <Stack.Screen name="DetailNewsUser" component={DetailsNewsUser} />
             <Stack.Screen name="CreateNews" component={CreateNews} />
             <Stack.Screen name="TabNavigationPrivate" component={TabNavigationPrivate} />
             <Stack.Screen name="TabNavigationPublic" component={TabNavigationPublic} />

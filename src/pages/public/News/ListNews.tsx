@@ -1,8 +1,11 @@
-import React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, DefaultTheme, FAB, Provider as PaperProvider, Subheading, TextInput, Title } from 'react-native-paper';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import apiConnection from '../../../services/ApiConnection';
+import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import HeaderRed from '../../../components/Headers/HeaderRed';
 
 
@@ -11,36 +14,77 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: 'white',
-    accent: '#FF5B5B',
-    background: 'blue',
+    accent: 'white'
   },
 };
 
-export default function News() {
+
+interface News {
+  id: number;
+  title: string;
+  description: string;
+  publication_date: Date;
+}
+
+
+export default function ListNews() {
 
   const navigation = useNavigation();
+
+  const [news, setNews] = useState<News[]>([]);
+
+  function handleDetailNews(id: number) {
+    navigation.navigate('DetailNewsUser', { id });
+  }
+
+  useFocusEffect(() => {
+    apiConnection.get('/readnews').then(response => {
+      setNews(response.data);
+    })
+  })
 
   return (
 
     <PaperProvider theme={theme}>
 
-      <HeaderRed titulo="Voltar para Tela Inicial" navigationPage="Welcome"/>
+      <HeaderRed titulo="Voltar para Tela Inicial" navigationPage="ChooseAccess" />
 
       <View style={styles.container}>
 
-        <Text style={styles.title}>Noticías</Text>
+        <Text style={styles.title}>Lista de Notícias</Text>
 
-        <Icon
-          style={styles.icon}
-          name="local-hospital"
-          size={128}
-          color="#000"
-        />
+        <ScrollView>
+
+          {
+            news.map(news =>
+
+              <View key={news.id}>
+
+                <Card
+                  style={styles.card}
+                  elevation={7}
+                  mode="elevated"
+                  onPress={() => { handleDetailNews(news.id) }}
+                >
+
+                  <Card.Content>
+                    <Title>{news.title}</Title>
+                    <Subheading>Data da Publicação: {news.publication_date}</Subheading>
+                  </Card.Content>
+
+                </Card>
+
+              </View>
+
+            )
+          }
+
+        </ScrollView>
 
       </View>
 
-   </PaperProvider>
-   
+    </PaperProvider>
+
   );
 }
 
@@ -48,17 +92,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   icon: {
     paddingBottom: 30
   },
   title: {
-    fontSize: 36,
+    fontSize: 25,
     fontFamily: 'Roboto',
     color: '#000',
-    paddingBottom: 40,
+    paddingTop: 15,
+    paddingBottom: 20,
     textAlign: 'center'
+  },
+  item: {
+    backgroundColor: '#BDBDBD',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: 5,
+    margin: 2,
+    borderColor: '#2a4944',
+    borderWidth: 2
+  },
+  textItem: {
+    fontSize: 18,
+    justifyContent: 'center',
+  },
+  button: {
+    flexDirection: 'row',
+    alignContent: 'center'
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'black'
+  },
+  card: {
+    margin: 5
   }
 });
