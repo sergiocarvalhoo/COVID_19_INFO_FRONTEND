@@ -1,8 +1,8 @@
-import React,{useEffect, useState} from 'react';
-import { DefaultTheme, Card, FAB, Provider as PaperProvider } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { DefaultTheme, Card, FAB, Provider as PaperProvider, Title, Subheading } from 'react-native-paper';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
 import apiConnection from '../../../services/ApiConnection';
 import { BorderlessButton } from 'react-native-gesture-handler';
@@ -46,53 +46,50 @@ export default function ListBulletin() {
     apiConnection.delete('/deletebulletin', { data: { id: `${id}` } });
   }
 
-  useFocusEffect(()=>{
-    apiConnection.get('/bulletins').then(response =>{
+  useFocusEffect(() => {
+    apiConnection.get('/bulletins').then(response => {
       setBulletin(response.data);
     })
   })
-  
+
 
   return (
 
     <PaperProvider theme={theme}>
 
-      <HeaderRedLogged titulo="Fazer Logout"/>
+      <HeaderRedLogged titulo="Fazer Logout" />
 
       <View style={styles.container}>
 
         <Text style={styles.title}>Lista De Boletins</Text>
 
         <ScrollView>
-            
+
           {
             bulletin.map(bulletin =>
 
               <View key={bulletin.id}>
-              
-                <Card 
+
+                <Card
                   style={styles.card}
-                  elevation = {7}
+                  elevation={7}
                   mode="elevated"
                 >
 
                   <Card.Content>
-                    <Text style={styles.textItem}>ID: {bulletin.id}</Text>
-                    <Text style={styles.textItem}>Data: {bulletin.publication_date}</Text>
+                    <Title>Data Do Boletim: {bulletin.publication_date}</Title>
+                    <Subheading>Confirmados: {bulletin.confirmed}</Subheading>
+                    <Subheading>Recuperados: {bulletin.recovered}</Subheading>
+                    <Subheading>Descartados: {bulletin.discarded}</Subheading>
+                    <Subheading>Em Análise: {bulletin.under_review}</Subheading>
+                    <Subheading>Internados: {bulletin.admitted}</Subheading>
+                    <Subheading>Óbitos: {bulletin.deaths}</Subheading>
 
                   </Card.Content>
-                  
+
                   <Card>
                     <Card.Content>
                       <View style={styles.button}>
-                        <BorderlessButton>
-                          <Icon name="edit" size={32} color="black" />
-                        </BorderlessButton>
-
-                        <BorderlessButton onPress={() => { handleDetailBulletin(bulletin.id) }}>
-                          <Icon name="view-list" size={32} color="black" />
-                        </BorderlessButton>
-
                         <BorderlessButton onPress={() => { handleDeleteBulletin(bulletin.id) }}>
                           <Icon name="delete-forever" size={32} color="black" />
                         </BorderlessButton>
@@ -103,9 +100,9 @@ export default function ListBulletin() {
                 </Card>
 
               </View>
-              
+
             )
-          }  
+          }
 
         </ScrollView>
 
@@ -118,8 +115,8 @@ export default function ListBulletin() {
 
       </View>
 
-   </PaperProvider>
-   
+    </PaperProvider>
+
   );
 }
 
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
   },
   textItem: {
     fontSize: 18,
-    fontFamily: 'Roboto',    
+    fontFamily: 'Roboto',
   },
   button: {
     flexDirection: 'row',
