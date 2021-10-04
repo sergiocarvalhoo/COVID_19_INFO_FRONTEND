@@ -1,8 +1,7 @@
 import React,{ useState } from 'react';
-import { Button, Card, DefaultTheme, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
+import { Card, DefaultTheme, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import apiConnection from '../../services/ApiConnection';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import HeaderRedLogged from '../../components/Headers/HeaderRedLogged';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -11,7 +10,7 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'white',
+    primary: '#FF5B5B',
     accent: 'white'
   },
 };
@@ -50,7 +49,7 @@ export default function ListAdministrators() {
           {
             administrators.map(administrator => (
 
-              <View>
+              <View key={administrator.registration}>
 
                 <Card 
                   style={styles.card}
@@ -98,15 +97,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 20,
     textAlign: 'center'
-  },
-  item: {
-    backgroundColor: '#BDBDBD',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: 5,
-    margin: 2,
-    borderColor: '#2a4944',
-    borderWidth: 2
   },
   textItem: {
     fontSize: 18,
