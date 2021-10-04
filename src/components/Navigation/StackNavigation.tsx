@@ -10,6 +10,7 @@ import TabNavigationPublic from './TabNavigationPublic';
 import DetailsNews from '../../pages/administrator/News/DetailNews';
 import CreateNews from '../../pages/administrator/News/CreateNews';
 import DetailsNewsUser from '../../pages/public/News/DetailNews';
+import CreateBulletin from '../../pages/administrator/Bulletin/CreateBulletin';
 
 
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ function StackNavigation() {
             <Stack.Screen name="CreateNews" component={CreateNews} />
             <Stack.Screen name="TabNavigationPrivate" component={TabNavigationPrivate} />
             <Stack.Screen name="TabNavigationPublic" component={TabNavigationPublic} />
+            <Stack.Screen name="CreateBulletin" component={CreateBulletin} />
         </Stack.Navigator>
     );
 }

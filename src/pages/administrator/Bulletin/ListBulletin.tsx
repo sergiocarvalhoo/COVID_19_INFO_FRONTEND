@@ -38,8 +38,8 @@ export default function ListBulletin() {
     navigation.navigate('CreateBulletin');
   }
 
-  function handleDetailBulletin(id: number) {
-    navigation.navigate('DetailBulletin', { id });
+  function handleUpdateBulletin(id: number) {
+    navigation.navigate('UpdateBulletin', { id });
   }
 
   function handleDeleteBulletin(id: number) {
@@ -90,6 +90,10 @@ export default function ListBulletin() {
                   <Card>
                     <Card.Content>
                       <View style={styles.button}>
+                        <BorderlessButton onPress={() => {handleUpdateBulletin(bulletin.id)}}>
+                          <Icon name="edit" size={32} color="black" />
+                        </BorderlessButton>
+
                         <BorderlessButton onPress={() => { handleDeleteBulletin(bulletin.id) }}>
                           <Icon name="delete-forever" size={32} color="black" />
                         </BorderlessButton>
