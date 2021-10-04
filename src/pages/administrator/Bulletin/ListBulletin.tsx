@@ -95,23 +95,27 @@ export default function ListBulletin() {
 
                   <Card.Content>
                     <Card>
+                      <Title style={styles.title2}>Data Do Boletim: {bulletin.publication_date}</Title>
+                    </Card>
+
+                    <Card>
                       <Subheading style={styles.subheadingred}>CONFIRMADOS: {bulletin.confirmed}</Subheading>
                     </Card>
 
                     <Card>
-                      <Subheading style={styles.subheadinggreen}>RECUPERADOS: {bulletin.recovered}</Subheading>
+                      <Subheading style={styles.subheadingblue}>RECUPERADOS: {bulletin.recovered}</Subheading>
                     </Card>
 
                     <Card>
-                      <Subheading style={styles.subheadingblue}>DESCARTADOS: {bulletin.discarded}</Subheading>
+                      <Subheading style={styles.subheadinggreen}>DESCARTADOS: {bulletin.discarded}</Subheading>
                     </Card>
 
                     <Card>
-                      <Subheading style={styles.subheadingyellow}>EM ANÁLISE: {bulletin.under_review}</Subheading>
+                      <Subheading style={styles.subheadingorange}>EM ANÁLISE: {bulletin.under_review}</Subheading>
                     </Card>
 
                     <Card>
-                      <Subheading style={styles.subheadingorange}>INTERNADOS: {bulletin.admitted}</Subheading>
+                      <Subheading style={styles.subheadingpurple}>INTERNADOS: {bulletin.admitted}</Subheading>
                     </Card>
 
                     <Card>
@@ -177,6 +181,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
   },
+  title2:{
+    fontWeight: 'bold'
+  }
+  ,
   icon: {
     paddingBottom: 30
   },
@@ -187,7 +195,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
-    paddingTop: 3
+    paddingTop: 3,
+    textAlign: 'center',
   },
   subheadingblue:{
     backgroundColor: '#3f51b5',
@@ -196,6 +205,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
+    textAlign: 'center',
     paddingTop: 3
   },
   subheadinggray:{
@@ -205,15 +215,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
+    textAlign: 'center',
     paddingTop: 3
   },
-  subheadingyellow:{
-    backgroundColor: '#ffee58',
+  subheadingpurple:{
+    backgroundColor: '#7e57c2',
     color: 'black',
     justifyContent: 'center',
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
+    textAlign: 'center',
     paddingTop: 3
   },
   subheadinggreen:{
@@ -223,6 +235,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
+    textAlign: 'center',
     paddingTop: 3
   },
   subheadingorange:{
@@ -232,6 +245,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 3,
+    textAlign: 'center',
     paddingTop: 3
   },
   title: {
