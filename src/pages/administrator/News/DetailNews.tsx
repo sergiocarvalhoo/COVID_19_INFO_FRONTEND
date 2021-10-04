@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Card, DefaultTheme, Paragraph, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
 import { ScrollView, StyleSheet, View, Dimensions } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRoute } from '@react-navigation/native';
 import apiConnection from '../../../services/ApiConnection';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
 import AppLoading from 'expo-app-loading';
-import { FormatDate } from '../../../util/DateFormat';
 
 
 const theme = {

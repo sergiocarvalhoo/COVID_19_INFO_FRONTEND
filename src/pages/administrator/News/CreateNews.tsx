@@ -50,7 +50,7 @@ export default function CreateNewsData() {
         const response = await apiConnection.post('/createnews', data);
 
         if (response.data) {
-            navigation.navigate("Noticías");
+            navigation.navigate("Noticias");
         } else {
             Alert.alert('Ocorreu um error ao Adicionar a Notícia !');
         }
@@ -131,7 +131,6 @@ export default function CreateNewsData() {
                                 source={{ uri: imageURL }}
                                 style={styles.uploadedImage}
                             />
-
                         )
                         )
                     }

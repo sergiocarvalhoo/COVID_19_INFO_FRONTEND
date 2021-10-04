@@ -10,54 +10,54 @@ import ListAdministrators from '../../pages/administrator/ListAdministrators';
 
 const Tab = createMaterialBottomTabNavigator();
 
-function TabNavigationPrivate(){ 
-    return(
-      
-        <Tab.Navigator 
-        initialRouteName="Administradores" 
-        activeColor="#000"
-        inactiveColor="white"
-        barStyle={{ backgroundColor: '#FF5B5B' }}
-        >
-          <Tab.Screen 
-          name="Administradores" 
-          component={ListAdministrators} 
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="account-cog" color={color} size={26} />
-            ),
-          }}          
-          />
-          <Tab.Screen 
-          name="Noticías" 
-          component={News} 
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="newspaper" color={color} size={26} />
-            ),
-          }}          
-          />
-          <Tab.Screen 
-          name="Boletins" 
-          component={Bulletin} 
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="chart-bar" color={color} size={26} />
-            ),
-          }}            
-          />
-          <Tab.Screen 
-          name="Locais de Vacinação" 
-          component={VaccinationLocal} 
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name="map-marker-radius" color={color} size={26} />
-            ),
-          }}            
-          />
-        </Tab.Navigator>
+function TabNavigationPrivate() {
+  return (
 
-    );
+    <Tab.Navigator
+      initialRouteName="Administradores"
+      activeColor="#000"
+      inactiveColor="white"
+      barStyle={{ backgroundColor: '#FF5B5B' }}
+    >
+      <Tab.Screen
+        name="Administradores"
+        component={ListAdministrators}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="account-cog" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Noticias"
+        component={News}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="newspaper" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Boletins"
+        component={Bulletin}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="chart-bar" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Locais de Vacinação"
+        component={VaccinationLocal}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon name="map-marker-radius" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+
+  );
 }
 
 export default TabNavigationPrivate;

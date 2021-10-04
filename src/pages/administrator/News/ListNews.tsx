@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Card, DefaultTheme, FAB, Provider as PaperProvider, Subheading, TextInput, Title } from 'react-native-paper';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { Card, DefaultTheme, FAB, Provider as PaperProvider, Subheading, Title } from 'react-native-paper';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import apiConnection from '../../../services/ApiConnection';
@@ -17,14 +17,12 @@ const theme = {
   },
 };
 
-
 interface News {
   id: number;
   title: string;
   description: string;
   publication_date: Date;
 }
-
 
 export default function ListNews() {
 
@@ -34,6 +32,19 @@ export default function ListNews() {
 
   function handlecreateNews() {
     navigation.navigate('CreateNews');
+  }
+
+  function handleUpdateNews(
+    id: number,
+    title: string,
+    description: string) {
+
+    navigation.navigate('UpdateNews', {
+      id,
+      title,
+      description
+    });
+    
   }
 
   function handleDetailNews(id: number) {
@@ -82,7 +93,7 @@ export default function ListNews() {
                     <Card.Content>
                       <View style={styles.button}>
 
-                        <BorderlessButton>
+                        <BorderlessButton onPress={() => { handleUpdateNews(news.id, news.title, news.description) }}>
                           <Icon name="edit" size={32} color="black" />
                         </BorderlessButton>
 
