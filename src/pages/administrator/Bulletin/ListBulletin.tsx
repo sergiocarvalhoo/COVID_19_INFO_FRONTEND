@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DefaultTheme, Card, FAB, Provider as PaperProvider, Title, Subheading } from 'react-native-paper';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -38,8 +38,26 @@ export default function ListBulletin() {
     navigation.navigate('CreateBulletin');
   }
 
-  function handleUpdateBulletin(id: number) {
-    navigation.navigate('UpdateBulletin', { id });
+  function handleUpdateBulletin(
+    id: number,
+    confirmed: number,
+    recovered: number,
+    discarded: number,
+    under_review: number,
+    admitted: number,
+    deaths: number,
+    publication_date: Date){
+
+    navigation.navigate('UpdateBulletin', { 
+      id,
+      confirmed, 
+      recovered, 
+      discarded, 
+      under_review, 
+      admitted, 
+      deaths, 
+      publication_date     
+    });
   }
 
   function handleDeleteBulletin(id: number) {
@@ -51,7 +69,6 @@ export default function ListBulletin() {
       setBulletin(response.data);
     })
   })
-
 
   return (
 
@@ -84,21 +101,35 @@ export default function ListBulletin() {
                     <Subheading>Em Análise: {bulletin.under_review}</Subheading>
                     <Subheading>Internados: {bulletin.admitted}</Subheading>
                     <Subheading>Óbitos: {bulletin.deaths}</Subheading>
-
                   </Card.Content>
 
                   <Card>
                     <Card.Content>
+
                       <View style={styles.button}>
-                        <BorderlessButton onPress={() => {handleUpdateBulletin(bulletin.id)}}>
+
+                        <BorderlessButton 
+                        onPress={() => {handleUpdateBulletin(
+                            bulletin.id,
+                            bulletin.confirmed, 
+                            bulletin.recovered,
+                            bulletin.discarded,
+                            bulletin.under_review,
+                            bulletin.admitted,
+                            bulletin.deaths,
+                            bulletin.publication_date
+                          )}}>
                           <Icon name="edit" size={32} color="black" />
                         </BorderlessButton>
 
                         <BorderlessButton onPress={() => { handleDeleteBulletin(bulletin.id) }}>
                           <Icon name="delete-forever" size={32} color="black" />
                         </BorderlessButton>
+
                       </View>
+
                     </Card.Content>
+
                   </Card>
 
                 </Card>
@@ -140,15 +171,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 20,
     textAlign: 'center'
-  },
-  item: {
-    backgroundColor: '#ffffff',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    padding: 5,
-    margin: 2,
-    borderColor: '#2a4944',
-    borderWidth: 2
   },
   textItem: {
     fontSize: 18,
