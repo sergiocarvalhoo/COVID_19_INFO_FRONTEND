@@ -94,13 +94,33 @@ export default function ListBulletin() {
                 >
 
                   <Card.Content>
-                    <Title>Data Do Boletim: {bulletin.publication_date}</Title>
-                    <Subheading>Confirmados: {bulletin.confirmed}</Subheading>
-                    <Subheading>Recuperados: {bulletin.recovered}</Subheading>
-                    <Subheading>Descartados: {bulletin.discarded}</Subheading>
-                    <Subheading>Em Análise: {bulletin.under_review}</Subheading>
-                    <Subheading>Internados: {bulletin.admitted}</Subheading>
-                    <Subheading>Óbitos: {bulletin.deaths}</Subheading>
+                    <Card>
+                      <Title style={styles.title2}>Data Do Boletim: {bulletin.publication_date}</Title>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadingred}>CONFIRMADOS: {bulletin.confirmed}</Subheading>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadingblue}>RECUPERADOS: {bulletin.recovered}</Subheading>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadinggreen}>DESCARTADOS: {bulletin.discarded}</Subheading>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadingorange}>EM ANÁLISE: {bulletin.under_review}</Subheading>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadingpurple}>INTERNADOS: {bulletin.admitted}</Subheading>
+                    </Card>
+
+                    <Card>
+                      <Subheading style={styles.subheadinggray}>ÓBITOS: {bulletin.deaths}</Subheading>
+                    </Card>
                   </Card.Content>
 
                   <Card>
@@ -161,8 +181,72 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
   },
+  title2:{
+    fontWeight: 'bold'
+  }
+  ,
   icon: {
     paddingBottom: 30
+  },
+  subheadingred:{
+    backgroundColor: '#ef5350',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    paddingTop: 3,
+    textAlign: 'center',
+  },
+  subheadingblue:{
+    backgroundColor: '#3f51b5',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    textAlign: 'center',
+    paddingTop: 3
+  },
+  subheadinggray:{
+    backgroundColor: '#9e9e9e',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    textAlign: 'center',
+    paddingTop: 3
+  },
+  subheadingpurple:{
+    backgroundColor: '#7e57c2',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    textAlign: 'center',
+    paddingTop: 3
+  },
+  subheadinggreen:{
+    backgroundColor: '#4caf50',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    textAlign: 'center',
+    paddingTop: 3
+  },
+  subheadingorange:{
+    backgroundColor: '#ff7043',
+    color: 'black',
+    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 3,
+    textAlign: 'center',
+    paddingTop: 3
   },
   title: {
     fontSize: 25,
