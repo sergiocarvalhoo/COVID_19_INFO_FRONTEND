@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, DefaultTheme, FAB, Provider as PaperProvider, TextInput } from 'react-native-paper';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import apiConnection from '../../../services/ApiConnection';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import MapView, { MapEvent, Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
-import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
-import { Feather } from '@expo/vector-icons';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import HeaderRedLogged from '../../../components/Headers/HeaderRedLogged';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-//import {maker} from '../../../../assets/map-maker@2x.png' ;
+import { useNavigation } from '@react-navigation/native';
+const syringe = require('../../../images/syringe.png');
+import mapStyle from '../../../maps/mapStyle.json'
 
 
 const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'white',
+    primary: '#FF5B5B',
     accent: 'white'
   },
 };
@@ -29,13 +29,13 @@ interface vaccinationLocations {
   description: string;
 }
 
-const LocationMap: React.FC = () => {
+export default function LocationMap() {
 
-  const navigation = useNavigation();
 
   const [vaccinationLocations, setLocations] = useState<vaccinationLocations[]>([])
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
 
   useFocusEffect(() => {
@@ -48,36 +48,34 @@ const LocationMap: React.FC = () => {
     setPosition(event.nativeEvent.coordinate);
   }
 
+  function handleClearInputs() {
+    setName('');
+    setDescription('');
+    setPosition({ latitude: 0, longitude: 0 });
+  }
+
   function handleAddLocation(latitude: number, longitude: number, name: string) {
+
     const data = {
       name,
-      description: 'Ponto de Vacinação',
+      description,
       latitude,
       longitude
-
     }
-    apiConnection.post('createvaccinationlocation', { data });
-    console.log(data);
+
+    apiConnection.post('createvaccinationlocation', data);
+
+    handleClearInputs();
+
   }
 
   function handleDeleteLocation(id: number) {
     apiConnection.delete('/deletevaccinationlocation', { data: { id: `${id}` } });
-    console.log(id);
   }
-
-  function handleUpdateNews(latitude: number, longitude: number, name: string) {
-    const data = {
-      name,
-      description: 'Ponto de Vacinação',
-      latitude,
-      longitude
-    }
-
-    apiConnection.put('/updatevaccinationlocation', data)
-  };
 
 
   return (
+
     <PaperProvider theme={theme}>
 
       <HeaderRedLogged titulo="Fazer Logout" />
@@ -93,35 +91,41 @@ const LocationMap: React.FC = () => {
           }}
           style={styles.mapStyle}
           onPress={handleSelectMapPosition}
+          provider={PROVIDER_GOOGLE}
+          customMapStyle={mapStyle}
         >
           {
-            vaccinationLocations.map(vaccinationLocations =>
-              <Marker key={vaccinationLocations.id} coordinate={{
-                latitude: vaccinationLocations.latitude,
-                longitude: vaccinationLocations.longitude,
-              }}
+            vaccinationLocations.map(vaccinationLocations => (
+              <Marker
+                icon={syringe}
+                key={vaccinationLocations.id}
+                coordinate={{
+                  latitude: vaccinationLocations.latitude,
+                  longitude: vaccinationLocations.longitude,
+                }}
               >
-                <Callout>
-                  <Card>
-                    <Text>
-                      {vaccinationLocations.name}
-                      ({vaccinationLocations.description})
-                    </Text>
-                  </Card>
-                  <BorderlessButton onPress={() => { handleDeleteLocation(vaccinationLocations.id) }}>
-                    <Icon name="delete-forever" size={32} color="black" />
 
+                <Callout
+                  onPress={() => { handleDeleteLocation(vaccinationLocations.id) }}
+                >
+
+                  <Text style={styles.textCallout}>Nome do Local: {vaccinationLocations.name}</Text>
+                  <Text style={styles.textCallout}>Descrição: {vaccinationLocations.description}</Text>
+
+                  <BorderlessButton>
+                    <Icon name="delete-forever" size={48} color="#FF5B5B" />
                   </BorderlessButton>
 
                 </Callout>
 
-
               </Marker>
 
+            )
             )
           }
 
           <Marker
+            icon={syringe}
             pinColor="black"
             coordinate={{
               latitude: position.latitude,
@@ -133,10 +137,10 @@ const LocationMap: React.FC = () => {
         </MapView>
 
 
-        <View style={styles.container1}>
+        <View>
 
           <TextInput
-            style={styles.footerText}
+            style={styles.text_input}
             label="Digite o Nome do Local de Vacinação:"
             value={name}
             selectionColor='#FF5B5B'
@@ -145,18 +149,29 @@ const LocationMap: React.FC = () => {
             onChangeText={setName}
           />
 
+          <TextInput
+            style={styles.text_input}
+            label="Digite a Descrição Local de Vacinação:"
+            value={description}
+            selectionColor='#FF5B5B'
+            underlineColor='#FF5B5B'
+            outlineColor='#FF5B5B'
+            onChangeText={setDescription}
+          />
+
           <Button
             style={styles.button}
             icon="map"
             color='#FF5B5B'
             mode="contained"
             onPress={() => { handleAddLocation(position.latitude, position.longitude, name) }}>
-            Adicionar
+            Adicionar Local de Vacinação
           </Button>
 
         </View>
 
       </View>
+
     </PaperProvider>
   );
 }
@@ -167,95 +182,20 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative'
   },
-
-
-  container1: {
-    margin: 'auto' ,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
-    //footer
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 3,
-    
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    elevation: 3,
-   
-    // // borderRadius: 28,
-    // height: 50,
-    // paddingLeft: 50,
-   
-
-  },
-
   mapStyle: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-  createOrphanageButton: {
-    width: 56,
-    height: 56,
-    backgroundColor: "#15c3d6",
-    borderRadius: 28,
-
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  footer: {
-    position: 'absolute',
-    left: 24,
-    right: 24,
-    bottom: 32,
-
-    backgroundColor: "#fff",
-    // borderRadius: 28,
-    height: 46,
-    paddingLeft: 24,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-
-    elevation: 3,
-  },
-  footerText: {
-    color: '#8fa7b3',
-    fontFamily: 'Nunito_700Bold',
-    alignItems: 'center',
-    height: 25,
-    width: 200,
-
-    justifyContent: 'space-between',
-  },
-
-  nextButton: {
-    backgroundColor: '#15c3d6',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 56,
-
-    position: 'absolute',
-    left: 24,
-    right: 24,
-    bottom: 40,
-  },
-
-  nextButtonText: {
-    fontFamily: 'Nunito_800ExtraBold',
-    fontSize: 16,
-    color: '#FFF',
+    height: 410
   },
   button: {
     marginTop: 0,
-    color: '#FF5B5B',
-    alignItems: 'flex-start'
+    color: '#FF5B5B'
+  },
+  text_input: {
+    marginBottom: 15
+  },
+  textCallout: {
+    fontWeight: 'bold',
+    fontSize: 18
   }
-});
 
-export default LocationMap;
+});

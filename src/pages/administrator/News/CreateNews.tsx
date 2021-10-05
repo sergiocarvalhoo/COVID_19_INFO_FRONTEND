@@ -86,7 +86,7 @@ export default function CreateNewsData() {
 
             <HeaderRedLogged titulo="Fazer Logout" />
 
-            <Text style={styles.title}>Criar nova noticia</Text>
+            <Text style={styles.title}>Criar nova notícia</Text>
 
             <ScrollView style={styles.container}>
 
