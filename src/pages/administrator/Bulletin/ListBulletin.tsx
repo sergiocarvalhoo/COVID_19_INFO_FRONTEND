@@ -39,24 +39,24 @@ export default function ListBulletin() {
   }
 
   function handleUpdateBulletin(
-    id: number,
-    confirmed: number,
-    recovered: number,
-    discarded: number,
-    under_review: number,
-    admitted: number,
-    deaths: number,
-    publication_date: Date){
+    id: string,
+    confirmed: string,
+    recovered: string,
+    discarded: string,
+    under_review: string,
+    admitted: string,
+    deaths: string,
+    publication_date: Date) {
 
-    navigation.navigate('UpdateBulletin', { 
+    navigation.navigate('UpdateBulletin', {
       id,
-      confirmed, 
-      recovered, 
-      discarded, 
-      under_review, 
-      admitted, 
-      deaths, 
-      publication_date     
+      confirmed,
+      recovered,
+      discarded,
+      under_review,
+      admitted,
+      deaths,
+      publication_date
     });
   }
 
@@ -128,17 +128,19 @@ export default function ListBulletin() {
 
                       <View style={styles.button}>
 
-                        <BorderlessButton 
-                        onPress={() => {handleUpdateBulletin(
-                            bulletin.id,
-                            bulletin.confirmed, 
-                            bulletin.recovered,
-                            bulletin.discarded,
-                            bulletin.under_review,
-                            bulletin.admitted,
-                            bulletin.deaths,
-                            bulletin.publication_date
-                          )}}>
+                        <BorderlessButton
+                          onPress={() => {
+                            handleUpdateBulletin(
+                              bulletin.id.toString(),
+                              bulletin.confirmed.toString(),
+                              bulletin.recovered.toString(),
+                              bulletin.discarded.toString(),
+                              bulletin.under_review.toString(),
+                              bulletin.admitted.toString(),
+                              bulletin.deaths.toString(),
+                              bulletin.publication_date
+                            )
+                          }}>
                           <Icon name="edit" size={32} color="black" />
                         </BorderlessButton>
 
@@ -181,14 +183,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
   },
-  title2:{
+  title2: {
     fontWeight: 'bold'
   }
   ,
   icon: {
     paddingBottom: 30
   },
-  subheadingred:{
+  subheadingred: {
     backgroundColor: '#ef5350',
     color: 'black',
     justifyContent: 'center',
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     textAlign: 'center',
   },
-  subheadingblue:{
+  subheadingblue: {
     backgroundColor: '#3f51b5',
     color: 'black',
     justifyContent: 'center',
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 3
   },
-  subheadinggray:{
+  subheadinggray: {
     backgroundColor: '#9e9e9e',
     color: 'black',
     justifyContent: 'center',
@@ -218,7 +220,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 3
   },
-  subheadingpurple:{
+  subheadingpurple: {
     backgroundColor: '#7e57c2',
     color: 'black',
     justifyContent: 'center',
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 3
   },
-  subheadinggreen:{
+  subheadinggreen: {
     backgroundColor: '#4caf50',
     color: 'black',
     justifyContent: 'center',
@@ -238,7 +240,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 3
   },
-  subheadingorange:{
+  subheadingorange: {
     backgroundColor: '#ff7043',
     color: 'black',
     justifyContent: 'center',
